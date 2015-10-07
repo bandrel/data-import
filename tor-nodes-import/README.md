@@ -14,8 +14,14 @@ This script will run in Python 2.7+ and higher. It may work in Python 3, but tha
 Note that QRadar does not currently ship with Python 2.7, so this script can normally not be run directly on the QRadar console. Additionally, it expects to find and execute the TOR Browser bundle (modified Firefox) and therefore is best run on a desktop (Mac, Windows, Linux) that has the Tor Bundle installed. With proper knowledge of Tor's workings, one could modify it to run the anonymizing proxy directly to enable 'headless' execution.  I haven't even tried that, yet.
 
 This script requires TorCtl which can be found here:
+   https://github.com/bandrel/pytorctl.git
 
-   https://gitweb.torproject.org/pytorctl.git
+   *The master repo of the pytorctl does not contain a setup.py.  The repository above does so you can use pip to install it.
+
+Commands to clone and install:
+
+   git clone https://github.com/bandrel/pytorctl.git
+   pip install pytorctl/
 
 
 DETAILED DESCRIPTION
