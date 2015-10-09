@@ -74,6 +74,9 @@ def add_tor_node(set_name, ip):
             print('tor node ' + str(ip) + ' insertion HTTP status: ' + str(response.status_code))
     except requests.exceptions.RequestException as exception:
         print(str(exception) + ', exiting.\n')
+def status_msg(current_node,nodes):
+    print "\n[+] (" + str(current_node) + "/" + str(len(nodes)) + ") " + \
+          str(round((current_node/float(len(nodes)))*100, 1)) + "% completed"
 
 
 def main():
@@ -103,24 +106,26 @@ def main():
         if (middle):
             intermediaries.add(node.ip)
     print('adding guard nodes ... ')
+    current_node = 1
     for node in guards:
         add_tor_node('tor_guard_nodes', node)
-        sys.stdout.write('.')
-        sys.stdout.flush()
+        status_msg(current_node,guards)
+        current_node += 1
     print(' done.\n')
     print('adding exit nodes ... ')
+    current_node = 1
     for node in exits:
         add_tor_node('tor_exit_nodes', node)
-        sys.stdout.write('.')
-        sys.stdout.flush()
+        status_msg(current_node,exits)
+        current_node += 1
     print(' done.\n')
+    current_node = 1
     print('adding intermediary nodes ... ')
     for node in intermediaries:
         add_tor_node('tor_intermediary_nodes', node)
-        sys.stdout.write('.')
-        sys.stdout.flush()
+        status_msg(current_node,intermediaries)
+        current_node += 1
     print(' done.\n')
-
 
 if __name__ == "__main__":
     main()
